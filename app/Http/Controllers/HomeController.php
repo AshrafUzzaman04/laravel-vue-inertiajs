@@ -22,7 +22,13 @@ class HomeController extends Controller
 
     public function users()
     {
-        sleep(2);
-        return Inertia::render("Users");
+        // sleep(1);
+        $time = now()->toTimeString();
+        return Inertia::render("Users", compact("time"));
+    }
+
+    public function logout(Request $request)
+    {
+        dd($request->name);
     }
 }

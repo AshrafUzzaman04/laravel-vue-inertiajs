@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Settings</h1>
+        <h1 class="text-4xl font-semibold">Settings</h1>
         <Nav />
     </div>
 </template>

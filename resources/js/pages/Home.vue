@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Home {{ name }}</h1>
+        <h1 class="text-4xl font-semibold">Home</h1>
         <Nav />
     </div>
 </template>
