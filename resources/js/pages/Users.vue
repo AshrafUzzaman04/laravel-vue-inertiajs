@@ -1,24 +1,19 @@
 <template>
-    <div>
-        <h1 class="text-4xl font-semibold">Users</h1>
-        <Nav />
-
-        <h2 style="margin-top: 100vh">Current Time {{ time }}</h2>
-        <Link href="/users" class="text-blue-600" preserve-scroll>Refresh</Link>
-    </div>
+    <Layout>
+        <div class="max-w-6xl mx-auto my-3">
+            <h1 class="text-4xl font-semibold">Users</h1>
+        </div>
+    </Layout>
 </template>
 
 <script>
-import Nav from "./shared/Nav.vue";
-import { Link } from "@inertiajs/vue3";
-
+import Layout from "./shared/Layout.vue";
 export default {
-    components: {
-        Nav,
-        Link,
-    },
     props: {
-        time: String,
+        name: String,
+    },
+    components: {
+        Layout,
     },
 };
 </script>

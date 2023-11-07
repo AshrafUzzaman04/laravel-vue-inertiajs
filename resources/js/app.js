@@ -17,13 +17,13 @@ createInertiaApp({
         delay: 250,
 
         // The color of the progress bar...
-        color: "#29d",
+        color: "red",
 
         // Whether to include the default NProgress styles...
         includeCSS: true,
 
         // Whether the NProgress spinner will be shown...
-        showSpinner: true,
+        showSpinner: false,
     },
 });
 
