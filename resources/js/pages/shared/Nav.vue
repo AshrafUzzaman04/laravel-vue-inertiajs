@@ -25,7 +25,7 @@
                     method="post"
                     as="button"
                     :data="{ name: 'ashraf' }"
-                    class="text-blue-500 hover:underline"
+                    class="text-black hover:underline"
                 >
                     Logout
                 </Link>

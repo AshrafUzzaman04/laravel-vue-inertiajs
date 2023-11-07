@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <meta name="description" content="My app App page" />
+    </Head>
     <header class="flex justify-between bg-gray-100 p-6">
         <div class="items-center">
             <h1 class="text-2xl font-semibold">My App</h1>
@@ -20,6 +23,7 @@ export default {
     },
     props: {
         name: String,
+        title: String,
     },
     computed: {
         username() {
