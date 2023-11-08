@@ -1,6 +1,6 @@
 import { createApp, h } from "vue";
 import NProgress from "nprogress";
-import { createInertiaApp, router, Head } from "@inertiajs/vue3";
+import { createInertiaApp, router, Head, Link } from "@inertiajs/vue3";
 
 createInertiaApp({
     resolve: (name) => {
@@ -12,6 +12,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .component("Head", Head)
+            .component("Link", Link)
             .mount(el);
     },
 
