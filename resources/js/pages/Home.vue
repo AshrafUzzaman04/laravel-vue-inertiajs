@@ -9,8 +9,5 @@
 import Layout from "./shared/Layout.vue";
 export default {
     layout: Layout,
-    components: {
-        Layout,
-    },
 };
 </script>

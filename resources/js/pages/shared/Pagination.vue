@@ -5,8 +5,12 @@
         :key="index"
         :href="link.url"
         v-html="link.label"
-        class="mx-1"
-        :class="{ 'text-gray-500': !link.url, 'font-bold': link.active }"
+        class="px-2 transition-all"
+        :class="{
+            'text-gray-500': !link.url,
+            'font-bold scale-125 text-white bg-violet-500 rounded-md':
+                link.active,
+        }"
         preserve-scroll
     />
 </template>
@@ -15,6 +19,7 @@
 export default {
     props: {
         links: Array,
+        active: Boolean,
     },
 };
 </script>
