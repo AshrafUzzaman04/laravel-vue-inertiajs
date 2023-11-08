@@ -1,11 +1,14 @@
 import { createApp, h } from "vue";
 import NProgress from "nprogress";
 import { createInertiaApp, router, Head, Link } from "@inertiajs/vue3";
+import Layout from "./pages/shared/Layout.vue";
 
 createInertiaApp({
     resolve: (name) => {
         const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
-        return pages[`./Pages/${name}.vue`];
+        let page = pages[`./Pages/${name}.vue`];
+        page.default.layout = page.default.layout || Layout;
+        return page;
     },
     //__Use head or any other componets for automatically import that all the pages__//
     setup({ el, App, props, plugin }) {

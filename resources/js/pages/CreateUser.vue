@@ -21,17 +21,17 @@
                         type="text"
                         placeholder="Name"
                         :class="{
-                            'border-red-600 bg-white animate-pulse':
-                                errors.full_name,
+                            'border-red-600 bg-white animate-pulse focus:animate-none':
+                                form.errors.full_name,
                         }"
                         v-model="form.full_name"
                     />
 
                     <p
                         class="text-xs italic text-red-500"
-                        v-if="errors.full_name"
+                        v-if="form.errors.full_name"
                     >
-                        {{ errors.full_name }}
+                        {{ form.errors.full_name }}
                     </p>
                 </div>
                 <!-- Email -->
@@ -46,7 +46,7 @@
                         class="w-full px-4 py-2 leading-tight text-gray-700 bg-gray-200 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-purple-500"
                         :class="{
                             'border-red-600 bg-white animate-pulse':
-                                errors.email,
+                                form.errors.email,
                         }"
                         id="inline-full-email"
                         type="text"
@@ -57,7 +57,7 @@
                         class="mt-1 text-xs italic text-red-500"
                         v-if="errors.email"
                     >
-                        {{ errors.email }}
+                        {{ form.errors.email }}
                     </p>
                 </div>
                 <!-- Password -->
@@ -75,7 +75,7 @@
                         placeholder="Password"
                         :class="{
                             'border-red-600 bg-white animate-pulse':
-                                errors.password,
+                                form.errors.password,
                         }"
                         v-model="form.password"
                     />
@@ -83,7 +83,7 @@
                         class="text-xs italic text-red-500"
                         v-if="errors.password"
                     >
-                        {{ errors.password }}
+                        {{ form.errors.password }}
                     </p>
                 </div>
                 <div class="md:flex">
@@ -91,6 +91,7 @@
                         <button
                             class="px-4 py-2 font-bold text-white bg-purple-500 rounded shadow hover:bg-purple-400 focus:shadow-outline focus:outline-none"
                             type="submit"
+                            :disabled="form.processing"
                         >
                             Sign Up
                         </button>
@@ -103,26 +104,35 @@
 
 <script>
 import Layout from "./shared/Layout.vue";
-import { router } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 
 export default {
     layout: Layout,
     data() {
         return {
-            form: {
+            processing: false,
+            form: useForm({
                 full_name: null,
                 email: null,
                 password: null,
-            },
+            }),
         };
     },
     props: {
         errors: Object,
+        success_msg: String,
     },
     methods: {
         submit() {
-            router.post("/user/insert", this.form, {
+            this.form.post("/user/insert", {
                 preserveScroll: true,
+                onStart: () => {
+                    this.processing = this.processing = true;
+                },
+                onFinish: () => {
+                    this.processing = this.processing = false;
+                },
+                onSuccess: () => this.form.reset(),
             });
         },
     },

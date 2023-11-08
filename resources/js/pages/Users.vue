@@ -120,6 +120,7 @@
 <script>
 import Layout from "./shared/Layout.vue";
 import Pagination from "./shared/Pagination.vue";
+import debounce from "lodash/debounce";
 export default {
     layout: Layout,
     data() {
@@ -132,8 +133,9 @@ export default {
         users: Object,
         filters: Object,
     },
-    watch: {
-        search(val) {
+    methods: {
+        // Define a debounced version of the search function
+        debouncedSearch: debounce(function (val) {
             this.$inertia.get(
                 "/users",
                 {
@@ -144,6 +146,12 @@ export default {
                     replace: true,
                 }
             );
+        }, 600), // 800ms is an example debounce duration
+    },
+    watch: {
+        search(val) {
+            // Call the debounced search function
+            this.debouncedSearch(val);
         },
     },
     components: {

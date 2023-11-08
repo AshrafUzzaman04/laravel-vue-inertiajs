@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -49,6 +50,7 @@ class HomeController extends Controller
 
     public function userInsert(Request $request)
     {
+        sleep(1);
         // dd($request);
         $request->validate([
             "full_name" => "required|min:3",
@@ -62,12 +64,32 @@ class HomeController extends Controller
             "password" => $request->password,
         ]);
 
-        return redirect("/users");
+        return to_route('users.create');
     }
 
-
-    public function logout(Request $request)
+    public function login()
     {
-        dd($request->name);
+        return Inertia::render("Auth/Login");
+    }
+
+    /**
+     * Handle an authentication attempt.
+     */
+    public function authenticate(Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
+        }
+
+        return redirect()->back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 }
