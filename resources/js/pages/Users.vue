@@ -13,7 +13,7 @@
                     class="px-2 py-1 border-[2px] rounded-md outline-none focus:border-violet-500"
                 />
                 <Link
-                    href="user/create"
+                    href="users/create"
                     class="left-0 px-3 py-2 font-semibold text-white bg-purple-500 rounded-lg"
                     >Create User</Link
                 >

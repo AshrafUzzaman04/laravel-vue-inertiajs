@@ -3,7 +3,10 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get("/login", [HomeController::class, "login"])->name("login");
+Route::middleware("guest")->group(function () {
+    Route::get("/login", [HomeController::class, "login"])->name("login");
+    Route::post("/authenticate", [HomeController::class, "authenticate"])->name("authenticate");
+});
 
 Route::middleware("auth")->group(
     function () {
@@ -12,6 +15,6 @@ Route::middleware("auth")->group(
         Route::get('/users', [HomeController::class, 'users']);
         Route::get('/users/create', [HomeController::class, 'userCreate']);
         Route::post('/users', [HomeController::class, 'userInsert']);
-        Route::get('/logout', [HomeController::class, 'logout']);
+        Route::post("/logout", [HomeController::class, "logout"]);
     }
 );

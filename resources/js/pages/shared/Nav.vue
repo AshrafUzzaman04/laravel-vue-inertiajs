@@ -20,15 +20,7 @@
                 </NavLink>
             </li>
             <li>
-                <Link
-                    href="/logout"
-                    method="post"
-                    as="button"
-                    :data="{ name: 'ashraf' }"
-                    class="text-black hover:underline"
-                >
-                    Logout
-                </Link>
+                <NavLink href="/logout" method="post">Logout</NavLink>
             </li>
         </ul>
     </nav>
