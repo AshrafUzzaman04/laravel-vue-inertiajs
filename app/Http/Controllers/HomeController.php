@@ -39,7 +39,11 @@ class HomeController extends Controller
                     "email" => $user->email,
                 ]),
 
-            "filters" => $request->only(['search'])
+            "filters" => $request->only(['search']),
+
+            "can" => [
+                'create_user' => Auth::user()->can('create', [User::class]),
+            ]
         ]);
     }
 

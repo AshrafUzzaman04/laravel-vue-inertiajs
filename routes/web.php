@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware("guest")->group(function () {
@@ -13,8 +14,8 @@ Route::middleware("auth")->group(
         Route::get('/', [HomeController::class, 'home']);
         Route::get('/settings', [HomeController::class, 'settings']);
         Route::get('/users', [HomeController::class, 'users']);
-        Route::get('/users/create', [HomeController::class, 'userCreate']);
-        Route::post('/users', [HomeController::class, 'userInsert']);
+        Route::get('/users/create', [HomeController::class, 'userCreate'])->can("create", User::class);
+        Route::post('/users/insert', [HomeController::class, 'userInsert']);
         Route::post("/logout", [HomeController::class, "logout"]);
     }
 );

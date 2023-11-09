@@ -3,9 +3,15 @@
     <div class="max-w-6xl mx-auto my-5">
         <div class="flex flex-col">
             <div class="space-y-5">
-                <h1 class="text-4xl font-semibold">All User</h1>
+                <h1 class="text-4xl font-semibold text-center">All User</h1>
             </div>
-            <div class="flex justify-between mt-5">
+            <div
+                class="mt-5"
+                :class="{
+                    'flex justify-between': can.create_user,
+                    'text-right': !can.create_user,
+                }"
+            >
                 <input
                     v-model="search"
                     type="text"
@@ -13,6 +19,7 @@
                     class="px-2 py-1 border-[2px] rounded-md outline-none focus:border-violet-500"
                 />
                 <Link
+                    v-if="can.create_user"
                     href="users/create"
                     class="left-0 px-3 py-2 font-semibold text-white bg-purple-500 rounded-lg"
                     >Create User</Link
@@ -132,6 +139,7 @@ export default {
         name: String,
         users: Object,
         filters: Object,
+        can: Object,
     },
     methods: {
         // Define a debounced version of the search function

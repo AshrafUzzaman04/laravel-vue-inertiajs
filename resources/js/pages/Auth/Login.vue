@@ -1,5 +1,7 @@
 <template>
-    <!-- <Head :title="Login" /> -->
+    <Head>
+        <title>Login</title>
+    </Head>
     <div
         class="flex flex-col items-center justify-center max-w-6xl min-h-screen mx-auto"
     >
@@ -78,9 +80,12 @@
 </template>
 
 <script>
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Head } from "@inertiajs/vue3";
 export default {
     layout: null,
+    components: {
+        Head,
+    },
     data() {
         return {
             processing: false,
